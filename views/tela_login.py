@@ -3,7 +3,6 @@
 import customtkinter as ctk
 from tkinter import messagebox
 
-from controllers.app_controller import AppController
 from utils.estilos import (
     COR_FUNDO, COR_PRIMARIA, COR_VERDE, COR_TEXTO,
     COR_TEXTO_SECUNDARIO, COR_ERRO, FONTE
@@ -98,6 +97,9 @@ class TelaLogin(ctk.CTkFrame):
             return
 
         try:
+            # Importação local evita dependência circular entre tela e controlador.
+            from controllers.app_controller import AppController
+
             if AppController.autenticar(usuario, senha):
                 self.on_success(usuario)
             else:
