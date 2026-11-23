@@ -2,6 +2,8 @@
 
 import customtkinter as ctk
 
+from views.tela_doadores import TelaDoadores
+
 from utils.estilos import (
     COR_FUNDO, COR_PRIMARIA, COR_VERDE, COR_TEXTO,
     COR_TEXTO_SECUNDARIO, COR_SUPERFICIE, FONTE
@@ -41,7 +43,7 @@ class TelaPrincipal(ctk.CTkFrame):
 
         opcoes = [
             ("⌂", "Início", self.mostrar_inicio),
-            ("♙", "Doadores", self._modulo_em_breve),
+            ("♙", "Doadores", self.mostrar_doadores),
             ("＋", "Doações", self._modulo_em_breve),
             ("⇢", "Distribuições", self._modulo_em_breve),
             ("▦", "Relatórios", self._modulo_em_breve),
@@ -121,6 +123,11 @@ class TelaPrincipal(ctk.CTkFrame):
             text_color=COR_TEXTO, font=(FONTE, 13),
             wraplength=650, justify="left"
         ).pack(anchor="w", padx=22, pady=(0, 22))
+
+    def mostrar_doadores(self) -> None:
+        """Abre o módulo de gerenciamento de doadores."""
+        self._limpar_pagina()
+        TelaDoadores(self.pagina)
 
     def _modulo_em_breve(self) -> None:
         self._limpar_pagina()
