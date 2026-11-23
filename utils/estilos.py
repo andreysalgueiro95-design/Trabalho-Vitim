@@ -1,0 +1,13 @@
+"""Paleta e configurações visuais compartilhadas do Solidário Tech."""
+
+COR_PRIMARIA = "#173B5E"
+COR_PRIMARIA_HOVER = "#24577F"
+COR_VERDE = "#23865B"
+COR_VERDE_HOVER = "#1B6E49"
+COR_FUNDO = "#F2F5F8"
+COR_SUPERFICIE = "#FFFFFF"
+COR_TEXTO = "#243447"
+COR_TEXTO_SECUNDARIO = "#64748B"
+COR_BORDA = "#DCE3EA"
+COR_ERRO = "#B42318"
+FONTE = "Segoe UI"
