@@ -1,19 +1,15 @@
-"""Ponto de entrada inicial do Solidário Tech.
-
-A interface gráfica será conectada nas próximas etapas.
-"""
+"""Ponto de entrada do Solidário Tech."""
 
 from database.db_manager import db
+from controllers.app_controller import AppController
 
 
 def main() -> None:
-    """Inicializa os recursos locais do sistema."""
+    """Inicializa o banco e abre a interface desktop."""
     try:
         db.initialize()
-        print("Solidário Tech: banco de dados inicializado com sucesso.")
-        print(f"Arquivo do banco: {db.db_path}")
-        print("Acesso inicial: usuário admin | senha admin")
-        print("Próxima etapa: implementação da tela de login.")
+        aplicacao = AppController()
+        aplicacao.executar()
     except (RuntimeError, OSError) as exc:
         print(f"Erro ao iniciar o Solidário Tech: {exc}")
         raise SystemExit(1) from exc
