@@ -12,7 +12,7 @@ Sistema desktop de gerenciamento de doações para instituições de caridade, d
 
 ## Etapa atual: estrutura e banco de dados
 
-Esta etapa entrega a estrutura inicial, o gerenciador SQLite e a criação automática das tabelas. A interface será implementada nas próximas etapas.
+A primeira versão da interface já inclui tela de login, autenticação pelo SQLite, janela principal e menu lateral. Os módulos de cadastro e relatórios serão conectados nas próximas etapas.
 
 ## Como executar
 
@@ -36,14 +36,14 @@ Esta etapa entrega a estrutura inicial, o gerenciador SQLite e a criação autom
    python main.py
    ```
 
-O banco será criado automaticamente em `data/solidario_tech.db`.
+O banco será criado automaticamente em `data/solidario_tech.db` e a janela de login será aberta.
 
 ## Acesso inicial
 
 - Usuário: `admin`
 - Senha: `admin`
 
-A senha é armazenada com hash PBKDF2. Altere a senha padrão quando o gerenciamento de usuários estiver disponível.
+A senha é armazenada com hash PBKDF2. A tela principal abre após autenticação válida. Altere a senha padrão quando o gerenciamento de usuários estiver disponível.
 
 ## Estrutura
 
