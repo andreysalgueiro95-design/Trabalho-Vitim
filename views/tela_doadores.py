@@ -63,12 +63,6 @@ class TelaDoadores(ctk.CTkFrame):
         cabecalho = ctk.CTkFrame(self, fg_color=COR_PRIMARIA, corner_radius=8)
         cabecalho.pack(fill="x", pady=(0, 5))
         colunas = [("Nome", 2), ("CPF", 1), ("Telefone", 1), ("E-mail", 2), ("Ações", 1)]
-        for texto, peso in colunas:
-            cabecalho.grid_columnconfigure(len(cabecalho.grid_slaves()), weight=peso)
-            ctk.CTkLabel(
-                cabecalho, text=texto, text_color="#FFFFFF",
-                font=(FONTE, 12, "bold"), anchor="w"
-            ).pack_forget()
         for indice, (texto, peso) in enumerate(colunas):
             cabecalho.grid_columnconfigure(indice, weight=peso)
             ctk.CTkLabel(
