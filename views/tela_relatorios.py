@@ -33,6 +33,7 @@ class TelaRelatorios(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master, fg_color="transparent")
         self.resultado_atual = None
+        self.pack(fill="both", expand=True)
         self._montar_interface()
 
     def _montar_interface(self):
