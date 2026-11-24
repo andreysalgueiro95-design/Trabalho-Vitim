@@ -4,6 +4,7 @@ import customtkinter as ctk
 
 from views.tela_doadores import TelaDoadores
 from views.tela_doacoes import TelaDoacoes
+from views.tela_distribuicoes import TelaDistribuicoes
 
 from utils.estilos import (
     COR_FUNDO, COR_PRIMARIA, COR_VERDE, COR_TEXTO,
@@ -46,7 +47,7 @@ class TelaPrincipal(ctk.CTkFrame):
             ("⌂", "Início", self.mostrar_inicio),
             ("♙", "Doadores", self.mostrar_doadores),
             ("＋", "Doações", self.mostrar_doacoes),
-            ("⇢", "Distribuições", self._modulo_em_breve),
+            ("⇢", "Distribuições", self.mostrar_distribuicoes),
             ("▦", "Relatórios", self._modulo_em_breve),
         ]
         for simbolo, nome, comando in opcoes:
@@ -134,6 +135,11 @@ class TelaPrincipal(ctk.CTkFrame):
         """Abre o módulo de gerenciamento de doações."""
         self._limpar_pagina()
         TelaDoacoes(self.pagina)
+
+    def mostrar_distribuicoes(self) -> None:
+        """Abre o módulo de gerenciamento de distribuições."""
+        self._limpar_pagina()
+        TelaDistribuicoes(self.pagina)
 
     def _modulo_em_breve(self) -> None:
         self._limpar_pagina()
