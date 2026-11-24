@@ -87,19 +87,38 @@ class Doacao:
         status: str
     ) -> None:
         """Atualiza os dados de uma doação existente."""
-        db.execute(
-            """
-            UPDATE doacoes
-            SET doador_id = ?, item = ?, categoria = ?, quantidade = ?,
-                data_doacao = ?, validade = ?, status = ?,
-                atualizado_em = datetime('now', 'localtime')
-            WHERE id = ?
-            """,
-            (
-                doador_id, item, categoria, quantidade,
-                data_doacao, validade or None, status, doacao_id
+        with db.connection() as connection:
+            registro = connection.execute(
+                "SELECT quantidade FROM doacoes WHERE id = ?",
+                (doacao_id,)
+            ).fetchone()
+            if registro is None:
+                raise ValueError("A doação não foi encontrada.")
+
+            distribuicoes = connection.execute(
+                "SELECT COUNT(*) AS total FROM distribuicoes WHERE doacao_id = ?",
+                (doacao_id,)
+            ).fetchone()["total"]
+
+            if distribuicoes and int(quantidade) != int(registro["quantidade"]):
+                raise ValueError(
+                    "Não é possível alterar a quantidade de uma doação que já "
+                    "possui distribuições. O valor representa o saldo atual do estoque."
+                )
+
+            connection.execute(
+                """
+                UPDATE doacoes
+                SET doador_id = ?, item = ?, categoria = ?, quantidade = ?,
+                    data_doacao = ?, validade = ?, status = ?,
+                    atualizado_em = datetime('now', 'localtime')
+                WHERE id = ?
+                """,
+                (
+                    doador_id, item, categoria, quantidade,
+                    data_doacao, validade or None, status, doacao_id
+                )
             )
-        )
 
     @staticmethod
     def excluir(doacao_id: int) -> None:
