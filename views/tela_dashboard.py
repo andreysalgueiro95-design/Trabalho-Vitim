@@ -110,7 +110,8 @@ class TelaDashboard(ctk.CTkFrame):
 
     def _montar_graficos(self):
         self._limpar(self.graficos)
-        self.graficos.grid_columnconfigure((0, 1), weight=1, uniform="charts")
+        for coluna in range(2):
+            self.graficos.grid_columnconfigure(coluna, weight=1, uniform="charts")
 
         categorias = Dashboard.distribuicoes_por_categoria()
         meses = Dashboard.distribuicoes_por_mes()
