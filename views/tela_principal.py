@@ -6,6 +6,7 @@ from views.tela_doadores import TelaDoadores
 from views.tela_doacoes import TelaDoacoes
 from views.tela_distribuicoes import TelaDistribuicoes
 from views.tela_dashboard import TelaDashboard
+from views.tela_relatorios import TelaRelatorios
 
 from utils.estilos import (
     COR_FUNDO, COR_PRIMARIA, COR_VERDE, COR_TEXTO,
@@ -49,7 +50,7 @@ class TelaPrincipal(ctk.CTkFrame):
             ("♙", "Doadores", self.mostrar_doadores),
             ("＋", "Doações", self.mostrar_doacoes),
             ("⇢", "Distribuições", self.mostrar_distribuicoes),
-            ("▦", "Relatórios", self._modulo_em_breve),
+            ("▦", "Relatórios", self.mostrar_relatorios),
         ]
         for simbolo, nome, comando in opcoes:
             ctk.CTkButton(
@@ -111,6 +112,11 @@ class TelaPrincipal(ctk.CTkFrame):
         """Abre o módulo de gerenciamento de distribuições."""
         self._limpar_pagina()
         TelaDistribuicoes(self.pagina)
+
+    def mostrar_relatorios(self) -> None:
+        """Abre o módulo de relatórios e exportação em PDF."""
+        self._limpar_pagina()
+        TelaRelatorios(self.pagina)
 
     def _modulo_em_breve(self) -> None:
         self._limpar_pagina()
