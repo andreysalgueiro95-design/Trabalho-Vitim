@@ -131,15 +131,30 @@ class DatabaseManager:
         except (ValueError, AttributeError):
             return False
 
-    def _create_default_admin(self, connection: sqlite3.Connection) -> None:
-        """Cria admin/admin apenas se a conta ainda não existir."""
-        existing = connection.execute(
+        def _create_default_admin(self, connection: sqlite3.Connection) -> None:
+        """Garante a conta inicial andrey/123 para a apresentação."""
+        andrey = connection.execute(
+            "SELECT id FROM usuarios WHERE usuario = ?", ("andrey",)
+        ).fetchone()
+
+        if andrey is not None:
+            return
+
+        admin_anterior = connection.execute(
             "SELECT id FROM usuarios WHERE usuario = ?", ("admin",)
         ).fetchone()
-        if existing is None:
+
+        senha_hash = self.hash_password("123")
+
+        if admin_anterior is not None:
+            connection.execute(
+                "UPDATE usuarios SET usuario = ?, senha_hash = ? WHERE id = ?",
+                ("andrey", senha_hash, admin_anterior["id"])
+            )
+        else:
             connection.execute(
                 "INSERT INTO usuarios (usuario, senha_hash) VALUES (?, ?)",
-                ("admin", self.hash_password("admin"))
+                ("andrey", senha_hash)
             )
 
     def execute(self, query: str, parameters: Sequence[Any] = ()) -> int:
