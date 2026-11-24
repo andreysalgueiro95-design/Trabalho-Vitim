@@ -5,6 +5,7 @@ import customtkinter as ctk
 from views.tela_doadores import TelaDoadores
 from views.tela_doacoes import TelaDoacoes
 from views.tela_distribuicoes import TelaDistribuicoes
+from views.tela_dashboard import TelaDashboard
 
 from utils.estilos import (
     COR_FUNDO, COR_PRIMARIA, COR_VERDE, COR_TEXTO,
@@ -92,39 +93,9 @@ class TelaPrincipal(ctk.CTkFrame):
             widget.destroy()
 
     def mostrar_inicio(self) -> None:
+        """Abre o painel de indicadores e gráficos."""
         self._limpar_pagina()
-        ctk.CTkLabel(
-            self.pagina, text="Bem-vindo ao Solidário Tech",
-            text_color=COR_TEXTO, font=(FONTE, 27, "bold")
-        ).pack(anchor="w", pady=(8, 6))
-
-        ctk.CTkLabel(
-            self.pagina,
-            text="Sua plataforma de organização e acompanhamento de doações.",
-            text_color=COR_TEXTO_SECUNDARIO, font=(FONTE, 14)
-        ).pack(anchor="w", pady=(0, 24))
-
-        cartao = ctk.CTkFrame(
-            self.pagina, fg_color=COR_SUPERFICIE,
-            corner_radius=14, border_width=1, border_color="#DCE3EA"
-        )
-        cartao.pack(fill="x", pady=8)
-
-        ctk.CTkLabel(
-            cartao, text="Estrutura inicial pronta",
-            text_color=COR_VERDE, font=(FONTE, 18, "bold")
-        ).pack(anchor="w", padx=22, pady=(20, 8))
-
-        ctk.CTkLabel(
-            cartao,
-            text=(
-                "O acesso ao sistema está funcionando. Nas próximas etapas, "
-                "vamos conectar os módulos de doadores, doações, distribuições "
-                "e os indicadores do estoque."
-            ),
-            text_color=COR_TEXTO, font=(FONTE, 13),
-            wraplength=650, justify="left"
-        ).pack(anchor="w", padx=22, pady=(0, 22))
+        TelaDashboard(self.pagina)
 
     def mostrar_doadores(self) -> None:
         """Abre o módulo de gerenciamento de doadores."""
