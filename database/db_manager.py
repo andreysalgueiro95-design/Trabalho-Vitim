@@ -131,7 +131,7 @@ class DatabaseManager:
         except (ValueError, AttributeError):
             return False
 
-        def _create_default_admin(self, connection: sqlite3.Connection) -> None:
+    def _create_default_admin(self, connection: sqlite3.Connection) -> None:
         """Garante a conta inicial andrey/123 para a apresentação."""
         andrey = connection.execute(
             "SELECT id FROM usuarios WHERE usuario = ?", ("andrey",)
