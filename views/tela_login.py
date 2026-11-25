@@ -82,7 +82,7 @@ class TelaLogin(ctk.CTkFrame):
         ).pack(fill="x", pady=(10, 0))
 
         ctk.CTkLabel(
-            cartao, text="Acesso inicial: admin / admin",
+            cartao, text="Acesso administrativo",
             text_color=COR_TEXTO_SECUNDARIO, font=(FONTE, 11)
         ).pack(side="bottom", pady=18)
 
